@@ -9,8 +9,8 @@ CallbackListener cb;
 //float theta=PI/4;
 //float theta_dot=0.0;
 
-float l1 = 0.05;
-float l2 = 0.05;
+float l1 = 0.8;
+float l2 = 0.6;
 float m1 = 1;
 float m2 = 1;
 
@@ -100,7 +100,7 @@ void setup() {
     .setPosition(20, height-150)
     .setSize(1200, 20)
     .setRange(-PI, PI)
-    .setValue(3*PI/4)
+    .setValue(PI/4)
     .addCallback(new CallbackListener() {
     public void controlEvent(CallbackEvent theEvent) {
       //print(theEvent.getAction());
@@ -122,7 +122,7 @@ void setup() {
     .setPosition(20, height-200)
     .setSize(1200, 20)
     .setRange(-PI, PI)
-    .setValue(PI+0.01)
+    .setValue(0)
     .addCallback(new CallbackListener() {
     public void controlEvent(CallbackEvent theEvent) {
       //print(theEvent.getAction());
@@ -144,7 +144,7 @@ void setup() {
   //println(height, width);
 }
 
-float T=0.001;
+float T=0.0001;
 
 float F=0.0;
 float Fx=0.0;
@@ -154,17 +154,13 @@ float M = 0.2;
 float Mx = 5;
 //int pixelsPerm=3822;
 
-int pixelsPerm = int(1000*(1230-50)/293.0);
+int pixelsPerm = int(1000*(1230-50)/(293.0*50));
 
 long prevTime = millis();
 long time=prevTime;
 long diff = 0;
 
 void draw() {
-    time = millis();
-    diff = time-prevTime;
-    prevTime = time;
-    println(diff);
   //print(int(dragging));
   //if (!dragging1 && !dragging2 && control) {
   //  float val=0;
@@ -182,12 +178,14 @@ void draw() {
     //F=0;
     //float tht_1_old = tht_1;
     //float tht_1d_old = tht_1d;
-    for(int i=0; i<diff/(5000.0*T); i++){
+    int i=0;
+   for(; i<diff/(1000.0*T); i++) {
       tht_1n = generateNextTheta1(tau1, tau2, tht_1, tht_1d, tht_2, tht_2d, T);
       tht_2n = generateNextTheta2(tau1, tau2, tht_1, tht_1d, tht_2, tht_2d, T);
       tht_1=tht_1n;
       tht_2=tht_2n;
     }
+    print(i);
     theta1_slide.setValue(tht_1);
     theta2_slide.setValue(tht_2);
     //print("t1d =",tht_1d);
@@ -208,9 +206,12 @@ void draw() {
   line(width/2 + pixelsPerm*l1*sin(tht_1), height/2 + pixelsPerm*l1*cos(tht_1), width/2 + pixelsPerm*l1*sin(tht_1) + pixelsPerm*l2*sin(tht_2), height/2 + pixelsPerm*l1*cos(tht_1) + pixelsPerm*l2*cos(tht_2));
   //line(400, 600, 600, 800);
   //rotate( PI/8.0 * cos( map( millis()%7000, 0, 7000,0,TWO_PI) ) );  line(0,0,150,0);
-  ellipse(width/2 + pixelsPerm*l1*sin(tht_1), height/2 + pixelsPerm*l1*cos(tht_1), 20, 20);
-  ellipse(width/2 + pixelsPerm*l1*sin(tht_1) + pixelsPerm*l2*sin(tht_2), height/2 + pixelsPerm*l1*cos(tht_1) + pixelsPerm*l2*cos(tht_2), 20, 20);
+  ellipse(width/2 + pixelsPerm*l1*sin(tht_1), height/2 + pixelsPerm*l1*cos(tht_1), 20/0.3*m1, 20/0.3*m1);
+  ellipse(width/2 + pixelsPerm*l1*sin(tht_1) + pixelsPerm*l2*sin(tht_2), height/2 + pixelsPerm*l1*cos(tht_1) + pixelsPerm*l2*cos(tht_2), 20/0.3*m2, 20/0.3*m2);
   //ellipse(1000, 1000, 200, 200);
+  time = millis();
+  diff = time-prevTime;
+  prevTime = time;
 }
 float g=9.8;
 
