@@ -100,7 +100,7 @@ void setup() {
     .setPosition(20, height-150)
     .setSize(1200, 20)
     .setRange(-PI, PI)
-    .setValue(PI/4)
+    .setValue(3*PI/4)
     .addCallback(new CallbackListener() {
     public void controlEvent(CallbackEvent theEvent) {
       //print(theEvent.getAction());
@@ -154,7 +154,7 @@ float M = 0.2;
 float Mx = 5;
 //int pixelsPerm=3822;
 
-int pixelsPerm = int(1000*(1230-50)/(293.0*50));
+int pixelsPerm = int(1000*(1230-50)/(293.0*20));
 
 long prevTime = millis();
 long time=prevTime;
@@ -206,8 +206,8 @@ void draw() {
   line(width/2 + pixelsPerm*l1*sin(tht_1), height/2 + pixelsPerm*l1*cos(tht_1), width/2 + pixelsPerm*l1*sin(tht_1) + pixelsPerm*l2*sin(tht_2), height/2 + pixelsPerm*l1*cos(tht_1) + pixelsPerm*l2*cos(tht_2));
   //line(400, 600, 600, 800);
   //rotate( PI/8.0 * cos( map( millis()%7000, 0, 7000,0,TWO_PI) ) );  line(0,0,150,0);
-  ellipse(width/2 + pixelsPerm*l1*sin(tht_1), height/2 + pixelsPerm*l1*cos(tht_1), 20/0.3*m1, 20/0.3*m1);
-  ellipse(width/2 + pixelsPerm*l1*sin(tht_1) + pixelsPerm*l2*sin(tht_2), height/2 + pixelsPerm*l1*cos(tht_1) + pixelsPerm*l2*cos(tht_2), 20/0.3*m2, 20/0.3*m2);
+  ellipse(width/2 + pixelsPerm*l1*sin(tht_1), height/2 + pixelsPerm*l1*cos(tht_1), pixelsPerm*0.02/0.3*m1, pixelsPerm*0.02/0.3*m1);
+  ellipse(width/2 + pixelsPerm*l1*sin(tht_1) + pixelsPerm*l2*sin(tht_2), height/2 + pixelsPerm*l1*cos(tht_1) + pixelsPerm*l2*cos(tht_2), pixelsPerm*0.02/0.3*m2, pixelsPerm*0.02/0.3*m2);
   //ellipse(1000, 1000, 200, 200);
   time = millis();
   diff = time-prevTime;
